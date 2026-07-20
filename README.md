@@ -7,11 +7,27 @@
 [![React](https://img.shields.io/badge/React-Citizen%20UI-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Whisper](https://img.shields.io/badge/OpenAI-Whisper-412991?logo=openai&logoColor=white)](https://github.com/openai/whisper)
 [![Claude](https://img.shields.io/badge/Anthropic-Claude-191919?logo=anthropic&logoColor=white)](https://www.anthropic.com/)
-[![License](https://img.shields.io/badge/Hackathon-AI%20for%20Bharat%202026-feae2c)](https://github.com/vishal-r-v/KURAL)
+[![Hackathon](https://img.shields.io/badge/Hackathon-AI%20for%20Bharat%202026-feae2c)](https://github.com/vishal-r-v/KURAL)
 
 **KURAL** (குரல் — *voice*) lets citizens file civic complaints in **Tamil, Tanglish, or English** — by speaking or typing. The system transcribes the complaint, extracts category and location with Claude, routes it to the correct Greater Chennai Corporation department, assigns an SLA, and **audits officer resolutions with an LLM** before closing the ticket.
 
 > Built for **AI for Bharat Hackathon 2026** · Track: Smart Public Transport & Civic Infrastructure
+
+---
+
+## Screenshots
+
+| Home | File complaint | Track |
+|:---:|:---:|:---:|
+| ![Home](Web_Images/home.png) | ![File Complaint](Web_Images/File_Complaint.png) | ![Track Complaint](Web_Images/Track_Complaint.png) |
+
+| Dashboard | Map & queue | History |
+|:---:|:---:|:---:|
+| ![Dashboard](Web_Images/dashboard.png) | ![Map and queue](Web_Images/Map_and_queue.png) | ![Complaint History](Web_Images/Complaint_History.png) |
+
+| About | Citizen login (prototype) |
+|:---:|:---:|
+| ![About](Web_Images/About.png) | ![Login](Web_Images/Login.png) |
 
 ---
 
@@ -33,10 +49,13 @@ If an officer writes “issue noted,” the audit returns **reopen** and the com
 
 | Component | Status |
 |-----------|--------|
-| Whisper STT, Claude extraction & audit, SQLite, APScheduler, ward/dept routing | **Live** — real API calls and persistence |
+| Whisper STT, Claude extraction & resolution audit, SQLite, APScheduler, ward/dept routing | **Live** — real API calls and persistence |
 | Filing into GCC / CPGRAMS / TANGEDCO / CMWSSB | **Simulated** — no public write-API exists; tickets are stored in KURAL’s own DB |
+| Citizen SMS / push notifications | **Simulated** — trail entries prefixed `[SIMULATED SMS]`; no real SMS gateway |
+| Citizen Aadhaar login | **Prototype only** — credentials in browser `localStorage`; **not** linked to UIDAI |
+| Demo seed complaints | **Synthetic** — clearly marked `[DEMO SEED DATA…]` in transcripts |
 
-This is the **only** deliberate simplification. Department names, contacts, SLA hours, and 38 Chennai localities are real seed data.
+Department names, contacts, SLA hours, and **38 Chennai localities** are real seed data. Government filing is the main intentional simplification; the other simulated items above are also disclosed so nothing is presented as a live external integration when it is not.
 
 ---
 
@@ -78,7 +97,7 @@ This is the **only** deliberate simplification. Department names, contacts, SLA 
 | `kural_web/` | Primary citizen website (React + TypeScript) | http://localhost:3000 |
 | `frontend/app.py` | Admin / demo dashboard (Streamlit) | http://localhost:8501 |
 
-Citizen features include bilingual UI (English / தமிழ்), voice + text filing, track-by-ticket-ID, escalation timeline, public analytics, ward map (Leaflet + OpenStreetMap), complaint history, and a **prototype-only** Aadhaar login (browser `localStorage` — not linked to UIDAI).
+Citizen features include bilingual UI (English / தமிழ்), voice + text filing, track-by-ticket-ID, escalation timeline, public analytics, ward map (Leaflet + OpenStreetMap), complaint history, and a **prototype-only** Aadhaar login.
 
 ---
 
@@ -109,14 +128,33 @@ Install these **before** cloning and running the stack:
 
 ### Install ffmpeg
 
+**Ubuntu / Debian**
+
 ```bash
-# Ubuntu / Debian
 sudo apt-get update && sudo apt-get install -y ffmpeg
+```
 
-# macOS
+**macOS**
+
+```bash
 brew install ffmpeg
+```
 
-# Verify
+**Windows**
+
+```powershell
+# Option A — winget
+winget install --id Gyan.FFmpeg -e
+
+# Option B — Chocolatey
+choco install ffmpeg
+```
+
+Fallback: download a build from [ffmpeg.org](https://ffmpeg.org/download.html) (Windows builds), extract it, and add the `bin` folder to your system **PATH**.
+
+**Verify (all platforms)**
+
+```bash
 ffmpeg -version
 ```
 
@@ -190,9 +228,21 @@ Open **http://localhost:3000**.
 | Variable (`kural_web/.env`) | Purpose |
 |-----------------------------|---------|
 | `VITE_API_BASE_URL` | FastAPI base URL (default `http://localhost:8000`) |
-| `APP_URL` | Frontend self URL (default `http://localhost:3000`) |
+| `APP_URL` | Frontend self URL for the Express static host (default `http://localhost:3000`) |
 
 > Only non-secret values use the `VITE_` prefix. API keys stay in the **root** `.env` (backend only).
+
+### Demo citizen login (prototype)
+
+The navbar **Login** control is a local prototype for demos — not an official Aadhaar / UIDAI integration. For judging / walkthroughs you can use:
+
+| Field | Value |
+|-------|--------|
+| Name | `TesT` |
+| Aadhaar | `000000000000` |
+| Password | `TesT@123` |
+
+Register once with these values (or any 12-digit Aadhaar + password), then log in again on the same browser. Data stays in `localStorage` on that machine only.
 
 ### 6. Start the admin dashboard (optional)
 
@@ -239,7 +289,7 @@ curl -s -X POST http://localhost:8000/demo/simulate-time \
 
 curl -s -X POST http://localhost:8000/demo/trigger-escalation
 
-# Lookup accepts ticket_id or internal UUID
+# Lookup accepts ticket_id or internal UUID (URL-encode slashes if needed)
 curl -s "http://localhost:8000/complaints/GCC/SWM/2026/00012"
 ```
 
@@ -250,7 +300,7 @@ curl -X POST http://localhost:8000/complaint/voice \
   -F "audio=@sample_audio/garbage_adyar.wav"
 ```
 
-Sample clips live under `sample_audio/`.
+Sample clips live under `sample_audio/` (`garbage_adyar.wav`, `water_velachery.wav`, `electricity_tnagar.wav`).
 
 ---
 
@@ -261,7 +311,7 @@ source venv/bin/activate
 pytest tests/ -v
 ```
 
-Covers routing, DB/ticket IDs, mocked extraction, escalation, duplicates, and seed integrity.
+Configured via `pyproject.toml` (`asyncio_mode = auto`). Coverage includes routing, DB/ticket IDs, mocked extraction, escalation, duplicates, notification log, and seed integrity (**42** tests in `tests/test_pipeline.py`).
 
 ---
 
@@ -272,13 +322,13 @@ Covers routing, DB/ticket IDs, mocked extraction, escalation, duplicates, and se
 | `GET` | `/health` | Health check |
 | `POST` | `/complaint/voice` | Audio upload → full pipeline |
 | `POST` | `/complaint/text` | Text → full pipeline |
-| `GET` | `/complaints` | List complaints |
-| `GET` | `/complaints/{id}` | Detail + trail (`ticket_id` or UUID) |
+| `GET` | `/complaints` | List complaints (`status`, `limit`, `offset`) |
+| `GET` | `/complaints/{id}` | Detail + trail (`ticket_id` or UUID; path converter allows `/` in ticket IDs) |
 | `POST` | `/complaints/{id}/resolve` | Resolution note + LLM audit |
 | `POST` | `/demo/simulate-time` | Shift SLA deadlines backward |
 | `POST` | `/demo/trigger-escalation` | Run SLA check immediately |
-| `GET` | `/meta/wards` | Ward names + lat/lng |
-| `GET` | `/meta/sla` | SLA hours by category |
+| `GET` | `/meta/wards` | Ward name list + `ward_details` (lat/lng) |
+| `GET` | `/meta/sla` | SLA hours / department / contact by category |
 
 Full OpenAPI UI: http://localhost:8000/docs
 
@@ -288,21 +338,31 @@ Full OpenAPI UI: http://localhost:8000/docs
 
 ```text
 KURAL/
-├── backend/                 # FastAPI + Whisper + Claude + SQLite + APScheduler
-│   ├── main.py              # HTTP routes
-│   ├── stt.py               # Speech-to-text
-│   ├── extraction.py        # LLM intake extraction
-│   ├── routing.py           # Ward / department / SLA
-│   ├── escalation.py        # Scheduler + resolution audit
-│   ├── db.py                # Persistence + ticket IDs
-│   ├── seed_data.json       # 38 Chennai wards + departments
-│   └── seed_demo_data.py    # Synthetic demo seed
-├── kural_web/               # React citizen website (primary UI)
-├── frontend/app.py          # Streamlit admin / demo dashboard
-├── sample_audio/            # Example .wav files
-├── tests/                   # pytest suite
+├── backend/
+│   ├── main.py              # FastAPI HTTP routes
+│   ├── config.py            # Env loading (API keys, Whisper model, DB path, SLA poll)
+│   ├── models.py            # Pydantic schemas (Complaint, statuses, API bodies)
+│   ├── stt.py               # Whisper speech-to-text wrapper
+│   ├── extraction.py        # Claude (primary) / NIM (fallback) intake extraction
+│   ├── routing.py           # Fuzzy ward match + department / SLA mapping
+│   ├── escalation.py        # APScheduler SLA poller + resolution audit
+│   ├── db.py                # Async SQLite CRUD, migrations, ticket_id generation
+│   ├── seed_data.json       # 38 Chennai wards + department metadata
+│   └── seed_demo_data.py    # Synthetic demo seed script
+├── kural_web/               # React + TypeScript + Vite citizen website (primary UI)
+│   ├── src/                 # Pages, API client, adapters, bilingual UI
+│   ├── public/fonts/        # Self-hosted Noto Sans Tamil
+│   ├── server.ts            # Dev/prod static server (no mock API)
+│   └── .env.example         # VITE_API_BASE_URL + APP_URL templates
+├── frontend/
+│   └── app.py               # Streamlit admin / demo dashboard
+├── Web_Images/              # UI screenshots for README / judging
+├── sample_audio/            # Example .wav complaint clips
+├── tests/
+│   └── test_pipeline.py     # End-to-end / unit pipeline tests
+├── pyproject.toml           # pytest configuration
 ├── .env.example             # Backend env template (no secrets)
-├── requirements.txt
+├── requirements.txt         # Python dependencies
 └── README.md
 ```
 
@@ -311,10 +371,11 @@ KURAL/
 ## Limitations
 
 1. **Government filing** is simulated (see disclosure above).  
-2. **Whisper accuracy** on Tamil improves with larger models (`WHISPER_MODEL=small` recommended).  
-3. **Citizen Aadhaar login** is a local prototype only — not an official identity integration.  
-4. **SQLite** suits demo/single-user use; production would need a stronger store and locked-down CORS.  
-5. **ffmpeg** must be installed on the host for voice complaints.
+2. **Citizen SMS** entries are simulated trail logs only.  
+3. **Whisper accuracy** on Tamil improves with larger models (`WHISPER_MODEL=small` recommended).  
+4. **Citizen Aadhaar login** is a local prototype only — not an official identity integration.  
+5. **SQLite** suits demo/single-user use; production would need a stronger store and locked-down CORS.  
+6. **ffmpeg** must be installed on the host for voice complaints.
 
 ---
 
