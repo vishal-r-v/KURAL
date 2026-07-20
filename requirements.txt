@@ -16,7 +16,10 @@ anthropic==0.34.2
 
 
 # Speech-to-text — Whisper (local)
-openai-whisper==20231117
+# 20231117's setup.py imports pkg_resources, which modern setuptools
+# no longer ships in pip's isolated build env. 20250625 uses PEP 517
+# packaging and installs cleanly on Render / current pip.
+openai-whisper==20250625
 
 # Audio processing (Whisper dependency)
 ffmpeg-python==0.2.0

@@ -20,12 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-# openai-whisper==20231117 still uses setup.py + pkg_resources; modern
-# setuptools (82+) dropped pkg_resources from the isolated build env.
-# Install with no build isolation against a setuptools that still ships it.
 RUN pip install --upgrade pip \
-    && pip install --no-cache-dir 'setuptools<81' wheel \
-    && pip install --no-cache-dir --no-build-isolation -r requirements.txt
+    && pip install --no-cache-dir -r requirements.txt
 
 # Package layout: uvicorn backend.main:app expects /app/backend/...
 COPY backend/ ./backend/
