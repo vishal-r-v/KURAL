@@ -1,0 +1,40 @@
+# Environment / secrets — never commit real keys
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Database (local SQLite — regenerate via seed script)
+backend/kural.db
+*.db
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Streamlit
+.streamlit/
+
+# Logs / temp
+*.log
+/tmp/
+
+# macOS
+.DS_Store
+
+# Cursor / local agent artifacts (if any land in the tree)
+.cursor/
+agent-transcripts/

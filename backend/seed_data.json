@@ -1,0 +1,509 @@
+{
+  "departments": {
+    "roads": {
+      "name": "PWD / GCC Engineering Dept",
+      "full_name": "Public Works Department / Greater Chennai Corporation Engineering Department",
+      "contact": "GCC Helpline: 1913",
+      "sla_hours": 168,
+      "code": "PWD"
+    },
+    "garbage": {
+      "name": "Solid Waste Management, GCC",
+      "full_name": "Greater Chennai Corporation - Solid Waste Management Department",
+      "contact": "GCC Helpline: 1913",
+      "sla_hours": 12,
+      "code": "SWM"
+    },
+    "water": {
+      "name": "Chennai Metro Water",
+      "full_name": "Chennai Metro Water Supply and Sewerage Board (CMWSSB)",
+      "contact": "Metro Water Helpline: 044-45674567",
+      "sla_hours": 24,
+      "code": "CMWSSB"
+    },
+    "electricity": {
+      "name": "TANGEDCO",
+      "full_name": "Tamil Nadu Generation and Distribution Corporation",
+      "contact": "TANGEDCO Helpline: 94987-94987",
+      "sla_hours": 24,
+      "code": "TNGDC"
+    },
+    "streetlights": {
+      "name": "GCC Electrical Dept",
+      "full_name": "Greater Chennai Corporation - Electrical Department",
+      "contact": "GCC Helpline: 1913",
+      "sla_hours": 72,
+      "code": "ELEC"
+    }
+  },
+  "wards": [
+    {
+      "id": "ward_173",
+      "display": "Ward 173 - Adyar",
+      "area": "Adyar",
+      "zone": "Zone 13 - Adyar",
+      "landmarks": [
+        "Adyar Bridge",
+        "Adyar River",
+        "IIT Madras Gate"
+      ],
+      "lat": 13.0067,
+      "lng": 80.257
+    },
+    {
+      "id": "ward_178",
+      "display": "Ward 178 - Besant Nagar",
+      "area": "Besant Nagar",
+      "zone": "Zone 13 - Adyar",
+      "landmarks": [
+        "Besant Nagar Beach",
+        "Elliot's Beach",
+        "Ashtalakshmi Temple"
+      ],
+      "lat": 13.0002,
+      "lng": 80.2665
+    },
+    {
+      "id": "ward_175",
+      "display": "Ward 175 - Velachery",
+      "area": "Velachery",
+      "zone": "Zone 13 - Adyar",
+      "landmarks": [
+        "Velachery MRTS",
+        "Phoenix Mall",
+        "Vijaya Nagar"
+      ],
+      "lat": 12.975,
+      "lng": 80.22
+    },
+    {
+      "id": "ward_181",
+      "display": "Ward 181 - Velachery West",
+      "area": "Velachery West",
+      "zone": "Zone 13 - Adyar",
+      "landmarks": [
+        "Velachery Lake",
+        "Grand Southern Trunk Road"
+      ],
+      "lat": 12.98,
+      "lng": 80.21
+    },
+    {
+      "id": "ward_176",
+      "display": "Ward 176 - Thiruvanmiyur",
+      "area": "Thiruvanmiyur",
+      "zone": "Zone 13 - Adyar",
+      "landmarks": [
+        "Thiruvanmiyur Beach",
+        "Marundeeswarar Temple"
+      ],
+      "lat": 12.983,
+      "lng": 80.259
+    },
+    {
+      "id": "ward_146",
+      "display": "Ward 146 - T.Nagar",
+      "area": "T.Nagar",
+      "zone": "Zone 11 - Valasaravakkam",
+      "landmarks": [
+        "Pondy Bazaar",
+        "Panagal Park",
+        "Usman Road",
+        "Ranganathan Street",
+        "Thyagaraya Nagar"
+      ],
+      "lat": 13.0418,
+      "lng": 80.2341
+    },
+    {
+      "id": "ward_125",
+      "display": "Ward 125 - Egmore",
+      "area": "Egmore",
+      "zone": "Zone 9 - Teynampet",
+      "landmarks": [
+        "Egmore Railway Station",
+        "Government Museum"
+      ],
+      "lat": 13.0732,
+      "lng": 80.2609
+    },
+    {
+      "id": "ward_98",
+      "display": "Ward 98 - Nungambakkam",
+      "area": "Nungambakkam",
+      "zone": "Zone 8 - Anna Nagar",
+      "landmarks": [
+        "Nungambakkam High Road",
+        "Valluvar Kottam"
+      ],
+      "lat": 13.0604,
+      "lng": 80.2425
+    },
+    {
+      "id": "ward_193",
+      "display": "Ward 193 - Sholinganallur",
+      "area": "Sholinganallur",
+      "zone": "Zone 15 - Sholinganallur",
+      "landmarks": [
+        "Sholinganallur Junction",
+        "OMR",
+        "Tidel Park"
+      ],
+      "lat": 12.901,
+      "lng": 80.2279
+    },
+    {
+      "id": "ward_190",
+      "display": "Ward 190 - Thoraipakkam",
+      "area": "Thoraipakkam",
+      "zone": "Zone 14 - Perungudi",
+      "landmarks": [
+        "OMR IT Corridor",
+        "Thoraipakkam Signal",
+        "Perungudi"
+      ],
+      "lat": 12.941,
+      "lng": 80.234
+    },
+    {
+      "id": "ward_57",
+      "display": "Ward 57 - Perambur",
+      "area": "Perambur",
+      "zone": "Zone 5 - Royapuram",
+      "landmarks": [
+        "Perambur Railway Station",
+        "ICF Colony"
+      ],
+      "lat": 13.113,
+      "lng": 80.234
+    },
+    {
+      "id": "ward_167",
+      "display": "Ward 167 - Mylapore",
+      "area": "Mylapore",
+      "zone": "Zone 12 - Alandur",
+      "landmarks": [
+        "Kapaleeshwarar Temple",
+        "Luz Church"
+      ],
+      "lat": 13.0338,
+      "lng": 80.2695
+    },
+    {
+      "id": "ward_135",
+      "display": "Ward 135 - Alwarpet",
+      "area": "Alwarpet",
+      "zone": "Zone 10 - Kodambakkam",
+      "landmarks": [
+        "Alwarpet",
+        "Music Academy"
+      ],
+      "lat": 13.033,
+      "lng": 80.254
+    },
+    {
+      "id": "ward_88",
+      "display": "Ward 88 - Anna Nagar",
+      "area": "Anna Nagar",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Anna Nagar Tower",
+        "Shanthi Colony"
+      ],
+      "lat": 13.085,
+      "lng": 80.2101
+    },
+    {
+      "id": "ward_82",
+      "display": "Ward 82 - Kolathur",
+      "area": "Kolathur",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Kolathur Junction",
+        "Retteri Lake"
+      ],
+      "lat": 13.118,
+      "lng": 80.216
+    },
+    {
+      "id": "ward_93",
+      "display": "Ward 93 - Aminjikarai",
+      "area": "Aminjikarai",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Aminjikarai Bus Stand",
+        "Arumbakkam"
+      ],
+      "lat": 13.073,
+      "lng": 80.221
+    },
+    {
+      "id": "ward_89",
+      "display": "Ward 89 - Shenoy Nagar",
+      "area": "Shenoy Nagar",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Shenoy Nagar Metro"
+      ],
+      "lat": 13.078,
+      "lng": 80.233
+    },
+    {
+      "id": "ward_92",
+      "display": "Ward 92 - Kilpauk",
+      "area": "Kilpauk",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Kilpauk Garden",
+        "Kilpauk Medical College"
+      ],
+      "lat": 13.079,
+      "lng": 80.243
+    },
+    {
+      "id": "ward_81",
+      "display": "Ward 81 - Purasawalkam",
+      "area": "Purasawalkam",
+      "zone": "Zone 7 - Ambattur",
+      "landmarks": [
+        "Purasawalkam High Road"
+      ],
+      "lat": 13.085,
+      "lng": 80.257
+    },
+    {
+      "id": "ward_152",
+      "display": "Ward 152 - Saidapet",
+      "area": "Saidapet",
+      "zone": "Zone 11 - Valasaravakkam",
+      "landmarks": [
+        "Saidapet Bridge",
+        "Saidapet Court"
+      ],
+      "lat": 13.021,
+      "lng": 80.223
+    },
+    {
+      "id": "ward_160",
+      "display": "Ward 160 - Guindy",
+      "area": "Guindy",
+      "zone": "Zone 12 - Alandur",
+      "landmarks": [
+        "Guindy Race Course",
+        "Guindy National Park",
+        "Little Mount"
+      ],
+      "lat": 13.01,
+      "lng": 80.22
+    },
+    {
+      "id": "ward_166",
+      "display": "Ward 166 - Santhome",
+      "area": "Santhome",
+      "zone": "Zone 12 - Alandur",
+      "landmarks": [
+        "Santhome Cathedral",
+        "Santhome Beach"
+      ],
+      "lat": 13.033,
+      "lng": 80.279
+    },
+    {
+      "id": "ward_137",
+      "display": "Ward 137 - Vadapalani",
+      "area": "Vadapalani",
+      "zone": "Zone 10 - Kodambakkam",
+      "landmarks": [
+        "Vadapalani Murugan Temple",
+        "Vadapalani Bus Stand"
+      ],
+      "lat": 13.05,
+      "lng": 80.212
+    },
+    {
+      "id": "ward_142",
+      "display": "Ward 142 - Ashok Nagar",
+      "area": "Ashok Nagar",
+      "zone": "Zone 10 - Kodambakkam",
+      "landmarks": [
+        "Ashok Nagar Signal",
+        "Ashok Pillar"
+      ],
+      "lat": 13.038,
+      "lng": 80.21
+    },
+    {
+      "id": "ward_149",
+      "display": "Ward 149 - Saligramam",
+      "area": "Saligramam",
+      "zone": "Zone 11 - Valasaravakkam",
+      "landmarks": [
+        "Saligramam AIR Colony",
+        "Kodambakkam Studios"
+      ],
+      "lat": 13.053,
+      "lng": 80.199
+    },
+    {
+      "id": "ward_129",
+      "display": "Ward 129 - Thousand Lights",
+      "area": "Thousand Lights",
+      "zone": "Zone 10 - Kodambakkam",
+      "landmarks": [
+        "Thousand Lights Mosque",
+        "Anna Salai"
+      ],
+      "lat": 13.062,
+      "lng": 80.254
+    },
+    {
+      "id": "ward_132",
+      "display": "Ward 132 - Royapettah",
+      "area": "Royapettah",
+      "zone": "Zone 10 - Kodambakkam",
+      "landmarks": [
+        "Royapettah Hospital",
+        "Whites Road"
+      ],
+      "lat": 13.053,
+      "lng": 80.264
+    },
+    {
+      "id": "ward_109",
+      "display": "Ward 109 - Triplicane",
+      "area": "Triplicane",
+      "zone": "Zone 9 - Teynampet",
+      "landmarks": [
+        "Marina Beach",
+        "Parthasarathy Temple"
+      ],
+      "lat": 13.057,
+      "lng": 80.276
+    },
+    {
+      "id": "ward_110",
+      "display": "Ward 110 - Marina",
+      "area": "Marina",
+      "zone": "Zone 9 - Teynampet",
+      "landmarks": [
+        "Marina Beach",
+        "Lighthouse"
+      ],
+      "lat": 13.05,
+      "lng": 80.282
+    },
+    {
+      "id": "ward_40",
+      "display": "Ward 40 - Tondiarpet",
+      "area": "Tondiarpet",
+      "zone": "Zone 4 - Tondiarpet",
+      "landmarks": [
+        "Tondiarpet Market",
+        "Chennai Port"
+      ],
+      "lat": 13.123,
+      "lng": 80.293
+    },
+    {
+      "id": "ward_50",
+      "display": "Ward 50 - Sowcarpet",
+      "area": "Sowcarpet",
+      "zone": "Zone 5 - Royapuram",
+      "landmarks": [
+        "Sowcarpet Market",
+        "NSC Bose Road"
+      ],
+      "lat": 13.094,
+      "lng": 80.28
+    },
+    {
+      "id": "ward_5",
+      "display": "Ward 5 - Tiruvottiyur",
+      "area": "Tiruvottiyur",
+      "zone": "Zone 1 - Thiruvottiyur",
+      "landmarks": [
+        "Tiruvottiyur Beach",
+        "Adhipureeswarar Temple"
+      ],
+      "lat": 13.16,
+      "lng": 80.3
+    },
+    {
+      "id": "ward_29",
+      "display": "Ward 29 - Madhavaram",
+      "area": "Madhavaram",
+      "zone": "Zone 3 - Madhavaram",
+      "landmarks": [
+        "Madhavaram Milk Colony",
+        "Madhavaram Bus Depot"
+      ],
+      "lat": 13.149,
+      "lng": 80.232
+    },
+    {
+      "id": "ward_184",
+      "display": "Ward 184 - Kottivakkam",
+      "area": "Kottivakkam",
+      "zone": "Zone 14 - Perungudi",
+      "landmarks": [
+        "Kottivakkam Beach",
+        "ECR"
+      ],
+      "lat": 12.956,
+      "lng": 80.253
+    },
+    {
+      "id": "ward_191",
+      "display": "Ward 191 - Injambakkam",
+      "area": "Injambakkam",
+      "zone": "Zone 14 - Perungudi",
+      "landmarks": [
+        "Injambakkam Beach",
+        "ECR"
+      ],
+      "lat": 12.928,
+      "lng": 80.247
+    },
+    {
+      "id": "ward_192",
+      "display": "Ward 192 - Karapakkam",
+      "area": "Karapakkam",
+      "zone": "Zone 15 - Sholinganallur",
+      "landmarks": [
+        "Karapakkam OMR",
+        "Sipcot IT Park"
+      ],
+      "lat": 12.926,
+      "lng": 80.234
+    },
+    {
+      "id": "ward_195",
+      "display": "Ward 195 - Semmancheri",
+      "area": "Semmancheri",
+      "zone": "Zone 15 - Sholinganallur",
+      "landmarks": [
+        "Semmancheri IT Corridor",
+        "OMR"
+      ],
+      "lat": 12.872,
+      "lng": 80.226
+    },
+    {
+      "id": "ward_200",
+      "display": "Ward 200 - Medavakkam",
+      "area": "Medavakkam",
+      "zone": "Zone 15 - Sholinganallur",
+      "landmarks": [
+        "Medavakkam Junction",
+        "Medavakkam Lake"
+      ],
+      "lat": 12.918,
+      "lng": 80.198
+    }
+  ],
+  "default_ward": "Ward 125 - Egmore",
+  "city": "Chennai",
+  "state": "Tamil Nadu",
+  "country": "India",
+  "_ward_data_note": "Ward numbers/localities sourced from GCC's public 15-zone, 200-ward structure (current operational structure as of 2026; a 20-zone restructuring is approved but not yet live in GCC's public systems). Tambaram/Pallavaram/Chromepet were intentionally dropped from the original 10-ward seed — they left GCC jurisdiction when Tambaram became its own City Municipal Corporation in 2021."
+}
