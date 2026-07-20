@@ -164,14 +164,48 @@ ffmpeg -version
 
 ## Quick start
 
-### 1. Clone
+### Run with Docker (recommended)
+
+Requires [Docker](https://docs.docker.com/get-docker/) and the Compose plugin (`docker compose version`).
+
+```bash
+git clone https://github.com/vishal-r-v/KURAL.git
+cd KURAL
+
+cp .env.example .env
+# Edit .env and set ANTHROPIC_API_KEY=your_key_here
+
+docker compose up --build
+```
+
+| Service | URL |
+|---------|-----|
+| Citizen website | http://localhost:3000 |
+| FastAPI backend / docs | http://localhost:8000 · http://localhost:8000/docs |
+| Streamlit admin | http://localhost:8501 |
+
+SQLite data persists in a Docker volume (`kural_data` → `/data/kural.db` in the backend container).
+
+**Seed demo complaints** (with the stack running):
+
+```bash
+docker compose exec backend python -m backend.seed_demo_data
+```
+
+Stop with `Ctrl+C` or `docker compose down`. Remove the DB volume with `docker compose down -v`.
+
+> The web image bakes `VITE_API_BASE_URL=http://localhost:8000` at **build** time so the browser can call the published backend port. Streamlit uses `KURAL_BACKEND_URL=http://backend:8000` for server-side calls inside the Docker network.
+
+### Manual install (without Docker)
+
+#### 1. Clone
 
 ```bash
 git clone https://github.com/vishal-r-v/KURAL.git
 cd KURAL
 ```
 
-### 2. Python environment
+#### 2. Python environment
 
 ```bash
 python3 -m venv venv
@@ -181,7 +215,7 @@ pip install -r requirements.txt
 
 First Whisper run downloads the model weights (`WHISPER_MODEL`, default `small`) — allow a few minutes and a working network connection.
 
-### 3. Environment variables (required)
+#### 3. Environment variables (required)
 
 ```bash
 cp .env.example .env
@@ -202,7 +236,7 @@ Edit **`.env`** and set at least:
 
 **Never commit `.env`.** Only `.env.example` (placeholders) is in the repo.
 
-### 4. Start the backend
+#### 4. Start the backend
 
 ```bash
 source venv/bin/activate
@@ -214,7 +248,7 @@ uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 | Health | http://localhost:8000/health |
 | Interactive API docs | http://localhost:8000/docs |
 
-### 5. Start the citizen website (primary UI)
+#### 5. Start the citizen website (primary UI)
 
 ```bash
 cd kural_web
@@ -244,7 +278,7 @@ The navbar **Login** control is a local prototype for demos — not an official 
 
 Register once with these values (or any 12-digit Aadhaar + password), then log in again on the same browser. Data stays in `localStorage` on that machine only.
 
-### 6. Start the admin dashboard (optional)
+#### 6. Start the admin dashboard (optional)
 
 ```bash
 # from repo root, venv active, backend already running
@@ -253,7 +287,7 @@ streamlit run frontend/app.py
 
 Open **http://localhost:8501** — file complaints, inspect trails, run demo time-shift / escalation triggers.
 
-### 7. Seed demo data (optional, recommended for judges)
+#### 7. Seed demo data (optional, recommended for judges)
 
 ```bash
 source venv/bin/activate
@@ -360,6 +394,11 @@ KURAL/
 ├── sample_audio/            # Example .wav complaint clips
 ├── tests/
 │   └── test_pipeline.py     # End-to-end / unit pipeline tests
+├── docker-compose.yml       # backend + web + Streamlit admin
+├── backend/Dockerfile
+├── frontend/Dockerfile      # Streamlit admin image
+├── kural_web/Dockerfile     # React production image (server.ts)
+├── .dockerignore
 ├── pyproject.toml           # pytest configuration
 ├── .env.example             # Backend env template (no secrets)
 ├── requirements.txt         # Python dependencies

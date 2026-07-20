@@ -1,0 +1,26 @@
+# Keep images lean and avoid leaking local secrets / caches into the build.
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+
+venv/
+.venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+
+*.db
+backend/kural.db
+
+kural_web/node_modules/
+kural_web/dist/
+**/node_modules/
+
+Web_Images/
+sample_audio/*.wav
+.cursor/
+*.log
+.DS_Store

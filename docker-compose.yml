@@ -1,0 +1,79 @@
+# KURAL — local full stack (backend + citizen web + Streamlit admin)
+#
+# Usage:
+#   cp .env.example .env   # set ANTHROPIC_API_KEY
+#   docker compose up --build
+#
+# URLs (on the host):
+#   http://localhost:3000  — citizen website
+#   http://localhost:8000  — FastAPI (docs at /docs)
+#   http://localhost:8501  — Streamlit admin
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: kural-backend
+    env_file:
+      - .env
+    environment:
+      # Override default backend/kural.db so the named volume persists data.
+      DB_PATH: /data/kural.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - kural_data:/data
+    networks:
+      - kural_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  web:
+    build:
+      context: ./kural_web
+      dockerfile: Dockerfile
+      args:
+        # Browser calls this URL directly — must be localhost (host port),
+        # not the Docker service hostname.
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: kural-web
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    networks:
+      - kural_net
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: kural-admin
+    env_file:
+      - .env
+    environment:
+      # Server-side HTTP from Streamlit → FastAPI (Docker DNS).
+      KURAL_BACKEND_URL: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8501:8501"
+    networks:
+      - kural_net
+    restart: unless-stopped
+
+volumes:
+  kural_data:
+
+networks:
+  kural_net:
+    driver: bridge
